@@ -129,8 +129,7 @@ GROUP BY (r.name)
 ORDER BY number_of_sales_reps
 
 Questions: GROUP BY Part II
-Use the SQL environment below to assist with answering the following questions. Whether you get stuck or you just want to double check your
-solutions, my answers can be found at the top of the next concept.
+Use the SQL environment below to assist with answering the following questions.
 
 For each account, determine the average amount of each type of paper they purchased across their orders. Your result should have four columns
 - one for the account name and one for the average quantity purchased for each of the paper types for each account.
@@ -171,3 +170,28 @@ JOIN region r
 ON r.id = s.region_id
 GROUP BY r.name, w.channel
 ORDER BY num_events DESC;
+
+Questions: DISTINCT
+Use the SQL environment below to assist with answering the following questions.
+
+Use DISTINCT to test if there are any accounts associated with more than one region.
+SELECT a.name "account name", r.name "region name"
+FROM accounts a
+JOIN sales_reps s
+ON s.id = a.sales_rep_id
+JOIN region r
+ON r.id = s.region_id;
+
+SELECT DISTINCT id, name
+FROM accounts;
+
+Have any sales reps worked on more than one account?
+SELECT s.id "rep_id", s.name "rep", COUNT(*) num_accounts
+FROM sales_reps s
+JOIN accounts a
+ON a.sales_rep_id = s.id
+GROUP BY rep_id, rep
+ORDER BY num_accounts DESC;
+
+SELECT DISTINCT id, name
+FROM sales_reps;
